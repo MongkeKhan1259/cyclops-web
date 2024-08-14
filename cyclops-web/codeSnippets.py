@@ -65,3 +65,25 @@ if __name__ == '__main__':
     smartWebCam = SmartWebCam('https://192.168.1.3:8080/video')
     smartWebCam.mainLoop()
 """
+
+mainCode = """
+import threading
+from customCamera import SmartWebCam
+
+conn = SerialConn('COM6', 9600)
+smartWebCam = SmartWebCam('https://192.168.1.2:8080/video')
+
+def sendObjLocation() -> None:
+    while True:
+        #conn.write('x120')
+        conn.write(f'x{smartWebCam.objX}')
+        conn.write(f'y{smartWebCam.objY}')
+        
+def stream() -> None:
+    smartWebCam.mainLoop()
+
+cameraThread = threading.Thread(target=stream)
+motionThread = threading.Thread(target=sendObjLocation)
+cameraThread.start()
+motionThread.start()
+"""
