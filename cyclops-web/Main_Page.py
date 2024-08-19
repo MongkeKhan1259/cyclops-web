@@ -1,3 +1,3 @@
 import streamlit as st
-st.markdown("# Project Cyclops")
-st.sidebar.markdown("# Main page")
+st.header('Project Cyclops')
+st.sidebar.header('Main Page')
